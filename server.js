@@ -128,7 +128,7 @@ app.post('/handle-preview', async (req, res) => {
     // 📤 Step 5: Upload processed file
     const fileMetadata = {
       name: originalName,
-      parents: ['1TGTQSdxLcewHaa8MSCs6DqHV1bcyDwq0'] // Replace with your folder ID
+      parents: ['1qi3Zn-ezpr_JuDoKBp4wgkt8elbMeIVA'] // Replace with your folder ID
     };
 
     const media = {
