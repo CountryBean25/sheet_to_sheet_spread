@@ -136,22 +136,16 @@ app.post('/handle-preview', async (req, res) => {
       body: Readable.from([processedBuffer])
     };
 
-    const uploadRes = await drive.files.create({
-      resource: fileMetadata,
-      media,
-      fields: 'id'
-    });
+ const uploadRes = await drive.files.create({
+  resource: fileMetadata,
+  media,
+  fields: 'id',
+  supportsAllDrives: true // <-- THIS IS THE FIX
+});
 
     const uploadedFileId = uploadRes.data.id;
 
-    // 🔓 Step 6: Make file public
-    await drive.permissions.create({
-      fileId: uploadedFileId,
-      requestBody: {
-        role: 'reader',
-        type: 'anyone'
-      }
-    });
+
 
     const publicUrl = `https://drive.google.com/file/d/${uploadedFileId}/view?usp=sharing`;
     console.log(`✅ Uploaded & Shared File for row ${row}: ${publicUrl}`);
